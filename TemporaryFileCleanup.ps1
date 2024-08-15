@@ -1,4 +1,4 @@
-﻿# Define paths to clean up
+﻿#Define paths to clean up
 $tempPaths = @(
     "$env:Temp",
     "$env:SystemRoot\Temp",
@@ -6,23 +6,23 @@ $tempPaths = @(
     "$env:UserProfile\AppData\Local\Temp"
 )
 
-# Define the age in days for files to be deleted
+#Define the age in days for files to be deleted
 $fileAgeInDays = 7
 
-# Function to clean up files older than a specified number of days
+#Function to clean up files older than a specified number of days
 function Clean-UpFiles {
     param (
         [string]$path,
         [int]$days
     )
     
-    # Get current date
+    #Get current date
     $currentDate = Get-Date
     
-    # Get files older than specified days
+    #Get files older than specified days
     $filesToDelete = Get-ChildItem -Path $path -Recurse -Force | Where-Object { ($currentDate - $_.LastWriteTime).Days -ge $days }
     
-    # Delete files
+    #Delete files
     foreach ($file in $filesToDelete) {
         try {
             Remove-Item -Path $file.FullName -Force -Recurse
@@ -33,7 +33,7 @@ function Clean-UpFiles {
     }
 }
 
-# Clean up each defined path
+#Clean up each defined path
 foreach ($path in $tempPaths) {
     if (Test-Path -Path $path) {
         Write-Output "Cleaning up files in: $path"
