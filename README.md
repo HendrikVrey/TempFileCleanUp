@@ -1,3 +1,3 @@
 # TempFileCleanUp
 
-Use this Powershell script to clear up temp files on your computer.
+Use this Powershell script to clear up temporary files on your computer.
